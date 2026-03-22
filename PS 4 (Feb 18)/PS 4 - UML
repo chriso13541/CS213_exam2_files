@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>CS 213 Fall 2023: Problem Set 4</title>
+<style>
+body { font: 14px Trebuchet MS; }
+pre { color: blue; }
+tt { color: blue; }
+a, a:active, a:visited { color: blue; }
+</style>
+</head><body>
+<center><h2>Problem Set 4</h2></center>
+<center><h3>UML</h3></center>
+<hr>
+<ol>
+<li>For each of the following pairs/groups of classes, show the most appropriate
+relationship between them using UML (include multiplicities for associations).
+<p>Also show code outlines for the classes involved, including fields that 
+pertain to the associations between them, if any (i.e. connections that are not
+super-sub or interface implementations). It doesn't matter exactly
+what data structure you use for fields that are collections--that is something
+that can be refined at implementation time, and does not change the UML.
+(Remember, the UML is language-independent, and different languages may
+offer different options of data structures.)
+<p></p><ol>
+<li><tt>Document</tt>-<tt>Keyword</tt> in a search engine
+<li><tt>Friend-Friend</tt> on Facebook
+<li><tt>Book-Chapter</tt>
+<li><tt>Parking Lot-Car</tt>
+</ol>
+<p></p><hr>
+</li><li>You are on a project that is developing software to manage a hospital. In particular,
+you are working on a sub-system that will model the patient care aspect including
+doctors, patients, hospital rooms, and services for which patients are billed. Services
+include medical services such as x-rays, as well as room services such as bed, TV, etc.
+<p>Draw a UML class diagram of your model, with just the names of classes (fields
+and methods not required), and relationships between them. Make sure to show
+multiplicities on associations.
+</p></li></ol>	    
+
+</body></html>

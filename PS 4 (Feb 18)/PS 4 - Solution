@@ -1,0 +1,123 @@
+<html>
+<head>
+<title>CS 213 Spring 2026: Problem Set 4 Solution</title>
+<style>
+body { font: 14px Trebuchet MS; }
+pre { color: blue; }
+tt { color: blue; }
+a, a:active, a:visited { color: blue; }
+</style>
+</head><body>
+<center><h2>Problem Set 4 Solution</h2></center>
+<center><h3>UML</h3></center>
+<hr>
+<ol>
+<li>For each of the following pairs/groups of classes, show the most appropriate
+relationship between them using UML (include multiplicities for associations).
+<p>Also show code outlines for the classes involved, including fields that 
+pertain to the associations between them, if any (i.e. connections that are not
+super-sub or interface implementations). It doesn't matter exactly
+what data structure you use for fields that are collections--that is something
+that can be refined at implementation time, and does not change the UML.
+(Remember, the UML is language-independent, and different languages may
+offer different options of data structures.)
+<p></p><ol>
+<li><tt>Document</tt>-<tt>Keyword</tt> in a search engine
+<p><b>ANSWER</b>
+        
+<p><pre>
+                 *   Contains >>  *
+        Document ------------------ Keyword
+</pre>
+This is a bidirectional relationship, i.e. a document can get at all the
+keywords in it, and a keyword can get at all the doocuments that contain it.
+<pre>
+   public class Document { 
+      List&lt;Keyword> keywords;  // keywords in this document, could be null
+      ...
+   }
+   public class Keyword { 
+      List&lt;Document> documents;  // documents that contain this keyword, could be null
+      ...
+   }
+</pre>
+<p><li><tt>Friend-Friend</tt> on Facebook
+<p><b>ANSWER</b>
+<p><pre>
+           -------
+          |      |
+         *|      |
+       Friend ----
+              *
+</pre>
+<pre>
+   public class Friend {
+      List&lt;Friend> friends;   // could be null
+      ...
+   }
+</pre>
+<p><li><tt>Book-Chapter</tt>
+<p><b>ANSWER</b>
+<p><pre>
+                      1..*
+         Book <>---------- Chapter   (Composition, diamond on Book should be shaded)
+</pre>
+Note: Multiplicity is not required on the Book side
+since by definition of a composition, a Chapter can only be in 1 book
+<pre>
+   public class Book {
+
+      public class Chapter {
+         ...
+      }
+
+      List<Chapter> chapters;   // must have at least one item, will be enforced 
+      ...                       // in any logic that accesses chapters
+   }
+</pre>
+Note: <tt>Chapter</tt> is an inner class because a chapter is only defined in
+the context of a book, and is non-static because you can't create a <tt>Chapter</tt>
+instance without having a <tt>Book</tt> instance to contain it. In other words, there
+are no free-standing chapters. So, for instance, you might do something like this:
+<pre>
+   Book book = new Book();
+   Book.Chapter chapter = book.new Chapter();
+</pre>
+
+<p><li><tt>Parking Lot-Car</tt>
+<p><b>ANSWER</b>
+<pre>
+                      1        *
+         ParkingLot <>---------- Car (Aggregation that is NOT a composition, diamond not shaded)
+</pre>
+Note: This is an aggregation since a parking lot contains cars. 
+However, it is not a composition - if the parking lot goes away, the cars
+will continue to exist. In other words, the existence of a car does not
+depend on the lot in which it is parked.
+<pre>
+    public class ParkingLot {
+       List&lt;Car> cars;
+       ...
+    }
+    public class Car { 
+       ParkingLot lot;   // single lot at which this car is parked, could be null
+       ...
+    }
+</pre>
+</ol>
+<p></p><hr>
+</li><li>You are on a project that is developing software to manage a hospital. In particular,
+you are working on a sub-system that will model the patient care aspect including
+doctors, patients, hospital rooms, and services for which patients are billed. Services
+include medical services such as x-rays, as well as room services such as bed, TV, etc.
+<p>Draw a UML class diagram of your model, with just the names of classes (fields
+and methods not required), and relationships between them. Make sure to show
+multiplicities on associations.
+</p></li>
+<p><b>SOLUTION</b> - See attached UML.
+<p>(Some small changes may have been made in recitation, especially
+  with multiplicities, so treat this as a starting solution...)
+</ol>	    
+
+
+</body></html>

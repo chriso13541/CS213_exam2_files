@@ -1,0 +1,22 @@
+Hi all,
+
+The second midterm exam will be given on
+Tuesday Mar 24, 3:50 pm-5:10 pm, in TIL 254 (usual class time and room). 
+
+The exam will be CLOSED TEXT, CLOSED NOTES. 
+
+You will write your answers in the given space on the exam paper, and will not be
+allowed to use extra sheets of paper. So please use a pencil (not pen) to write so
+you can erase and rewrite if you need to.
+
+The exam will primarily cover material that was covered after the topics on the first midterm, 
+i.e. from Feb 12 onward: UML, inheritance vs delegation, lambda expressions, equals method.
+The corresponding recitation problem sets are PS 4, PS 5 and PS 6.
+
+Design Patterns and GUI/FXML will NOT be on the exam.
+
+Since all of UML is based on object-oriented design and implementation, you are also
+expected to know foundational material on inheritance, interfaces, abstract classes,
+static and dynamic typing from earlier lectures. 
+
+You may be asked to write small code fragments to illustrate design principles. 

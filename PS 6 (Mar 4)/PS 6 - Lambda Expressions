@@ -1,0 +1,135 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>CS 213 Problem Set 6</title>
+<style>
+body { font: 14px Trebuchet MS; }
+pre { color: blue; }
+tt { color: blue; }
+a, a:active, a:visited { color: blue; }
+</style>
+</head><body>
+<center><h2>Problem Set 6</h2></center>
+<center><h3>Lambda Expressions</h3></center>
+<hr>
+<ol>
+<li>For each of the following expressions, tell whether it is valid or not. If valid,
+explain the reasoning. If not valid, explain why. 
+<ol>
+<p><li>
+<pre>
+() -> { }
+</pre>
+<p><li>
+<pre>
+() -> "Hello"
+</pre>
+<p><li>
+<pre>
+() -> { return "Goodbye"; }
+</pre>
+<p><li>
+<pre>
+(Integer i) -> { return i+10; }
+</pre>
+<p><li>
+<pre>
+(String s) -> { "Bourne Ultimatum"; }
+</pre>
+</ol>
+<hr>
+<p><li>Which of the following are functional interfaces?
+<ol>
+<li>
+<pre>
+public interface Sum1 { 
+   int sum(int i, int j); 
+}
+</pre>
+<li>
+<pre>
+public interface Sum2 extends Sum1 { 
+   double sum(double i, double j); 
+}
+</pre>
+<li>
+<pre>
+public interface Rectangle { 
+   double getWidth();
+   double getHeight();
+   default double area() {
+      return getWidth()*getHeight();
+   }
+}
+</pre>
+</ol>
+<hr>
+<li>Which of the following are valid uses of lambdas?
+<ol>
+<li>
+<pre>
+   public interface Executor {
+       void execute();
+   }
+   public void do(Executor ex) {
+       ex.execute();
+   }
+   do(() -> { });
+</pre>
+<li>
+<pre>
+  public interface Proc&lt;T> {
+      T process();
+  }
+  public Proc&lt;String> get() {
+      return () -> "I am a go getter!";
+  }
+</pre>
+<li>
+<pre>
+  Predicate&lt;Student> p = (Student s) -> s.getMajor();
+</pre>
+<li>
+<pre>
+  BiFunction&lt;Integer,Integer,String> bif = (int i, int j) -> ""+i+j;
+</pre>
+</ol>
+<hr>
+<li>This question refers to the <tt>Student</tt> class presented in lecture
+(Feb 26).
+<p><ol>
+<li>Write a lambda expression using a method reference to check if a student is a 
+senior.<br> Assign the expression to a variable with a type - in other words,
+the lambda expression has a name and a type.
+<li>Write a named and typed lambda expression using a method reference to get 
+the major of a student.
+<li>Given the following filter method:
+<pre>
+  public static List&lt;T>
+  filter(List&lt;T> list, Predicate&lt;T> p) {
+     List&lt;T> res = new ArrayList&lt;T>();
+     for (T t: list) {
+        if (p.test(t)) {
+           res.add(student);
+	}
+     }
+     return res;
+  }
+</pre>
+For each of the following, write one or more <tt>Predicate</tt> instances as 
+named and typed lambda expressions that can be passed to the <tt>filter</tt> 
+method to get the requires set
+of students. (Note: when composing
+predicates, you want to use previously constructed and named lambda 
+expressions for the individual predicates in the composition, otherwise
+the syntax gets very unwieldy.)
+<ol>
+<li>All non-CS majors
+<li>All CS and Physics majors who are commuters
+<li>Math seniors who are not commuters
+<li>Resident non-Math non-freshman students
+</ol>
+</ol>
+</ol>
+</body>
+</html>

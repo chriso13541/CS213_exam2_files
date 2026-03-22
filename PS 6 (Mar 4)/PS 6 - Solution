@@ -1,0 +1,234 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<title>CS 213 Problem Set 6 - Solution</title>
+<style>
+body { font: 14px Trebuchet MS; }
+pre { color: blue; }
+tt { color: blue; }
+a, a:active, a:visited { color: blue; }
+table { border-collapse: collapse; }
+th { border-bottom: 1px solid black; }
+td { font: 14px Trebuchet MS; padding-right: 20px; }
+</style>
+</head><body>
+<center><h2>Problem Set 6 - Solution</h2></center>
+<center><h3>Lambda Expressions</h3></center>
+<hr>
+<ol>
+<li>For each of the following expressions, tell whether it is valid or not. If valid,
+explain the reasoning. If not valid, explain why. 
+<ol>
+<p><li>
+<pre>
+() -> { }
+</pre>
+<p><b>ANSWER</b>
+<p>Valid. Corresponds to a method that takes no arguments, returns void, and has an
+empty body, e.g. 
+<pre>
+public void stuff() { }
+</pre>
+<p><li>
+<pre>
+() -> "Hello"
+</pre>
+<p><b>ANSWER</b>
+<p>Valid. Corresponds to a method that takes no arguments and returns
+  a <tt>String</tt>:
+<pre>
+public String stuff() { return "Hello"; }
+</pre>
+<p><li>
+<pre>
+() -> { return "Goodbye"; }
+</pre>
+<p><b>ANSWER</b>
+<p>Valid. Similar to previous, except it's written as an explicit
+  statement
+inside curly braces.
+<pre>
+public String stuff() { return "Goodbye"; }
+</pre>
+<p><li>
+<pre>
+(Integer i) -> return i+10;
+</pre>
+<p><b>ANSWER</b>
+<p>Invalid. Since <tt>return</tt> is a control flow statement, it has to be
+enclosed within braces.
+<p><li>
+<pre>
+(String s) -> { "Bourne Ultimatum"; }
+</pre>
+<p><b>ANSWER</b>
+<p>Invalid. <tt>"Bourne Ultimatum"</tt> is an expression, not a statement. You can
+do either of the following to get a correct lambda expression:
+<ul>
+<li>Move expression out of the braces:
+<pre>
+(String s) -> "Bourne Ultimatum"
+</pre>
+<li>Do a return statement:
+<pre>
+(String s) -> { return "Bourne Ultimatum"; }
+</pre>
+</ol>
+<hr>
+<p><li>Which of the following are functional interfaces?
+<ol>
+<li>
+<pre>
+public interface Sum1 { 
+   int sum(int i, int j); 
+}
+</pre>
+<p><b>ANSWER</b>
+<p>Yes.
+<li>
+<pre>
+public interface Sum2 extends Sum1 { 
+   double sum(double i, double j); 
+}
+</pre>
+<p><b>ANSWER</b>
+<p>No. <tt>Sum2</tt> has two abstract methods since in inherits <tt>sum</tt> from
+<tt>Sum1</tt>.
+<li>
+<pre>
+public interface Rectangle { 
+   double getWidth();
+   double getHeight();
+   default double area() {
+      return getWidth()*getHeight();
+   }
+}
+</pre>
+<p><b>ANSWER</b>
+<p>No. There are two abstract methods.
+</ol>
+<hr>
+<li>Which of the following are valid uses of lambdas?
+<ol>
+<li>
+<pre>
+   public interface Executor {
+       void execute();
+   }
+   public void do(Executor ex) {
+       ex.execute();
+   }
+   do(() -> { });
+</pre>
+<p><b>ANSWER</b>
+<p>Yes. The lambda takes no args and returns nothing, which
+matches the <tt>execute</tt> method of the <tt>Executor</tt> interface.
+
+<li>
+<pre>
+  public interface Proc&ltT> {
+      T process();
+  }
+  public Proc&lt;String> get() {
+      return () -> "I am a go getter!";
+  }
+</pre>
+<p><b>ANSWER</b>
+<p>Valid. The lambda in the return takes no args and a <tt>String</tt>, which
+matches the <tt>process</tt> method of the <tt>Proc</tt> interface, with
+the binding of <tt>String</tt> to the generic type <tt>T</tt>.
+<li>
+<pre>
+  Predicate&lt;Student> p = (Student s) -> s.getMajor();
+</pre>
+<p><b>ANSWER</b>
+<p>Invalid. The lambda should return a boolean.
+<li>
+<pre>
+  BiFunction&lt;Integer,Integer,String> bif = (int i, int j) -> ""+i+j;
+</pre>
+<p><b>ANSWER</b>
+<p>Invalid. The args for the lambda must be <tt>Integer</tt>s. Auto conversion to <tt>int</tt>
+will not be done. (If you omit the data type for the arguments, it
+  will work just fine.)
+</ol>
+<hr>
+<li>This question refers to the <tt>Student</tt> class presented in lecture 
+(Feb 26).
+<p><ol>
+<li>Write a lambda expression using a method reference to check if a student is a 
+senior.<br> Assign the expression to a variable with a type - in other words,
+the lambda expression has a name and a type.
+<p><b>ANSWER</b>
+<p>
+<pre>
+  Predicate&lt;Student> is_senior = Student::isSenior;
+</pre>
+<tt>is_senior</tt> is the name for the lambda expression,
+and <tt>Predicate&lt;Student></tt> is its type.
+<p>
+<li>Write a named and typed lambda expression using a method reference to get 
+the major of a student.
+<p><b>ANSWER</b>
+<p>
+<pre>
+  Function&lt;Student,String> major = Student::getMajor;
+</pre>
+
+<li>Given the following filter method:
+<pre>
+  public static List&lt;T>
+  filter(List&lt;T> list, Predicate&lt;T> p) {
+     List&lt;T> res = new ArrayList&lt;T>();
+     for (T t: list) {
+        if (p.test(t)) {
+           res.add(t);
+	}
+     }
+     return res;
+  }
+</pre>
+For each of the following, write one or more <tt>Predicate</tt> instances as named
+and typed lambda expressions that can be passed to the <tt>filter</tt> method to 
+get the required
+set of students. 
+(Note: when composing
+predicates, you want to use previously constructed and named lambda 
+expressions for the individual predicates in the composition, otherwise
+the syntax gets very unwieldy.)
+<p><ol>
+<li>All non-CS majors
+<p><b>ANSWER</b>
+<p>
+<pre>
+   Predicate&lt;Student> cs_major = s -> s.getMajor().equals("CS");
+   Predicate&lt;Student> non_cs_major = cs_major.negate();
+</pre>
+<li>All CS and Physics majors who are commuters
+<p><b>ANSWER</b>
+<p>
+<pre>
+   Predicate&lt;Student> physics_major = s -> s.getMajor().equals("Physics");
+   Predicate&lt;Student> commuter = Student::getCommuter;
+   Predicate&lt;Student> pred = (cs_major.or(physics_major)).and(commuter);
+   Predicate&lt;Student> is_senior = Student::isSenior;
+</pre>
+<li>Math seniors who are not commuters
+<p><b>ANSWER</b>
+<p>
+<pre>
+   Predicate&lt;Student> math_major = s -> s.getMajor().equals("Math");
+   Predicate&lt;Student> pred = (math_major.and(is_senior)).and(commuter.negate());
+</pre>
+<li>Resident non-Math non-freshman students
+<p><b>ANSWER</b>
+<p>
+<pre>
+   Predicate&lt;Student> is_freshman = Student::isFreshman;
+   Predicate&lt;Student> pred = commuter.negate().and(math_major.negate()).and(is_freshman.negate());
+</pre>
+</ol>
+</ol>
+</ol>
+</body>
+</html>

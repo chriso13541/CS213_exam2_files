@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>CS 213 Spring 2026: Problem Set 5</title>
+<style>
+body { font: 14px Trebuchet MS; }
+pre { color: blue; }
+tt { color: blue; }
+a, a:active, a:visited { color: blue; }
+</style>
+</head><body>
+<center><h2>Problem Set 5</h2></center>
+<center><h3>UML</h3></center>
+<hr>
+<ol>
+<li>For each of the following pairs/groups of classes, show the most appropriate
+relationship between them using UML (include multiplicities for associations).
+Each entity must have the minimal number of key attributes that characterize it.
+<p>Also show code outlines for the classes involved, including fields that 
+pertain to the associations between them, if any (i.e. connections that are not
+super-sub or interface implementations). It doesn't matter exactly
+what data structure you use for fields that are collections--that is something
+that can be refined at implementation time, and does not change the UML.
+(Remember, the UML is language-independent, and different languages may
+offer different options of data structures.)
+
+<ol>
+<li><tt>Entry</tt>-<tt>Contributor</tt> in Wikipedia. 
+<li><tt>Member--Seller--Bidder</tt> on eBay.
+<li><tt>Item</tt>-<tt>Bidder</tt> on eBay.
+</ol>
+
+<hr>
+
+</li><li>UML for Instagram
+<p>Suppose you are working on an Instagram software project.
+You are required to draw up a small portion of the
+UML, to describe relationships between users, the content they post (photos or
+videos, but could be other kinds), and tags they can apply to content (such
+as '@' or #' tags, but there could be others.) 
+
+<hr>
+
+</li><li>Class Diagram for Building a Room
+<p>We want to create a class diagram for building a Room that can contain Walls, Furniture and Windows.
+ 
+</p><p><ol>
+<li>The Drawable is an interface which is implemented in the Class Room
+</li><li>Class Room is a composition of Structures and Furniture (one Room can be composed by multiple Structures and Furniture. A Structure or a Furniture though cannot belong to more than one Room) 
+</li><li>A Structure is a general Class which passes its attributes to the classes that inherit from it (i.e. a Window and a Wall is a structure)
+</li><li>Class Couch is inheriting from class Furniture (which means that a couch is a Furniture)
+</li><li>Windows and Walls inherit from Structure (which means that a Windows and a Wall has all the functionality of a Structure plus some added functionality implemented inside each of these classes)
+</li><li>We can create more classes that inherit from Furniture and compose the Room.</li></ol>
+</p></p><hr>
+
+</ol>	    
+</body></html>
